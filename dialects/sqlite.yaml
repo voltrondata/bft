@@ -26,14 +26,22 @@ dependencies:
   string: 
     https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_string.yaml
 supported_types:
-  - i8
-  - i16
-  - i32
-  - i64
-  - fp32
-  - fp64
-  - bool
-  - str
+  i8:
+    sql_type_name: TINYINT
+  i16:
+    sql_type_name: SMALLINT
+  i32:
+    sql_type_name: INT
+  i64:
+    sql_type_name: HUGEINT
+  fp32:
+    sql_type_name: REAL
+  fp64:
+    sql_type_name: REAL
+  bool:
+    sql_type_name: BOOLEAN
+  str:
+    sql_type_name: TEXT
 scalar_functions:
 - name: arithmetic.add
   local_name: +

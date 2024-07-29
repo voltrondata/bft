@@ -26,19 +26,30 @@ dependencies:
   string: 
     https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_string.yaml
 supported_types:
-  - i8
-  - i16
-  - i32
-  - i64
-  - fp32
-  - fp64
-  - bool
-  - str
-  - date
-  - time
-  - ts
-  - tstz
-  - interval
+  i8:
+    sql_type_name: int8
+  i16:
+    sql_type_name: int16
+  i32:
+    sql_type_name: int32
+  i64:
+    sql_type_name: int64
+  fp32:
+    sql_type_name: float32
+  fp64:
+    sql_type_name: float64
+  bool:
+    sql_type_name: bool_
+  str:
+    sql_type_name: string
+  date:
+    sql_type_name: timestamp
+  time:
+    sql_type_name: timestamp
+  ts:
+    sql_type_name: timestamp
+  tstz:
+    sql_type_name: timestamp
 scalar_functions:
 - name: arithmetic.add
   local_name: +

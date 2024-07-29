@@ -83,7 +83,7 @@ class DialectFile(NamedTuple):
     scalar_functions: List[DialectFunction]
     aggregate_functions: List[DialectFunction]
     uri_to_func_prefix: Dict[str, str]
-    supported_types: List[str]
+    supported_types: Dict[str, str]
 
 
 class SqlMapping(NamedTuple):
