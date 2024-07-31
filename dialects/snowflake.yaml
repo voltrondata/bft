@@ -360,3 +360,15 @@ aggregate_functions:
   aggregate: true
   supported_kernels:
   - bool
+- name: arithmetic_decimal.bitwise_and
+  local_name: bitand
+  supported_kernels:
+    - dec_dec
+- name: arithmetic_decimal.bitwise_or
+  local_name: bitor
+  supported_kernels:
+    - dec_dec
+- name: arithmetic_decimal.bitwise_xor
+  local_name: bitxor
+  supported_kernels:
+    - dec_dec
