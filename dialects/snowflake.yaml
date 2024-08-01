@@ -360,3 +360,8 @@ aggregate_functions:
   aggregate: true
   supported_kernels:
   - bool
+- name: arithmetic_decimal.bitwise_not
+  local_name: bitnot
+  required_options:
+  supported_kernels:
+    - dec
