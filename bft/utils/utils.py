@@ -18,7 +18,7 @@ def type_to_dialect_type(type: str, type_map: Dict[str, str])->str:
     """
     type_to_check = type.split("<")[0].strip() if "<" in type else type
     if type_to_check not in type_map:
-        raise Exception(f"Unrecognized type: {type}")
+        return None
     type_val = type_map[type_to_check]
     if not "<" in type:
         return type_val

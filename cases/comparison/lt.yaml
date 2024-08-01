@@ -59,6 +59,24 @@ cases:
       type: boolean
   - group: basic
     args:
+      - value: 7.25
+        type: decimal<38, 2>
+      - value: 7.25
+        type: decimal<38, 2>
+    result:
+      value: false
+      type: boolean
+  - group: basic
+    args:
+      - value: 2.49
+        type: decimal<38, 2>
+      - value: 2.50
+        type: decimal<38, 2>
+    result:
+      value: true
+      type: boolean
+  - group: basic
+    args:
       - value: 1.5e+308
         type: fp64
       - value: inf
@@ -101,6 +119,24 @@ cases:
         type: i16
       - value: null
         type: i16
+    result:
+      value: null
+      type: boolean
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 2>
+      - value: 2.50
+        type: decimal<38, 2>
+    result:
+      value: null
+      type: boolean
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 2>
+      - value: null
+        type: decimal<38, 2>
     result:
       value: null
       type: boolean

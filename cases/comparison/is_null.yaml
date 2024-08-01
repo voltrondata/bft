@@ -19,8 +19,22 @@ cases:
       type: boolean
   - group: basic
     args:
+      - value: 7.823
+        type: decimal<38, 3>
+    result:
+      value: false
+      type: boolean
+  - group: basic
+    args:
       - value: null
         type: i16
+    result:
+      value: true
+      type: boolean
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 3>
     result:
       value: true
       type: boolean

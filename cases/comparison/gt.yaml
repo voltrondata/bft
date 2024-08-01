@@ -57,6 +57,24 @@ cases:
     result:
       value: true
       type: boolean
+  - group: basic
+    args:
+      - value: -922337203685775808
+        type: decimal<38, 0>
+      - value: -922337203685775807
+        type: decimal<38, 0>
+    result:
+      value: false
+      type: boolean
+  - group: basic
+    args:
+      - value: 7.25
+        type: decimal<38, 2>
+      - value: 2.50
+        type: decimal<38, 2>
+    result:
+      value: true
+      type: boolean
   - group:
       id: null_input
       description: Examples with null as input
@@ -101,6 +119,24 @@ cases:
         type: i16
       - value: null
         type: i16
+    result:
+      value: null
+      type: boolean
+  - group: null_input
+    args:
+      - value: 2
+        type: decimal<38, 2>
+      - value: null
+        type: decimal<38, 2>
+    result:
+      value: null
+      type: boolean
+  - group: null_input
+    args:
+      - value: null
+        type: decimal<38, 2>
+      - value: null
+        type: decimal<38, 2>
     result:
       value: null
       type: boolean

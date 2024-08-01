@@ -5,6 +5,7 @@ from typing import Dict, NamedTuple
 from bft.cases.runner import SqlCaseResult, SqlCaseRunner
 from bft.cases.types import Case, CaseLiteral
 from bft.dialects.types import SqlMapping
+from bft.utils.utils import type_to_dialect_type
 
 type_map = {
     "i8": "TINYINT",
@@ -19,9 +20,7 @@ type_map = {
 
 
 def type_to_sqlite_type(type: str):
-    if type not in type_map:
-        raise Exception(f"Unrecognized type: {type}")
-    return type_map[type]
+    return type_to_dialect_type(type, type_map)
 
 
 def literal_to_str(lit: str | int | float):
@@ -62,10 +61,12 @@ class SqliteRunner(SqlCaseRunner):
         self.conn.execute("BEGIN;")
 
         try:
-            arg_defs = [
-                f"arg{idx} {type_to_sqlite_type(arg.type)}"
-                for idx, arg in enumerate(case.args)
-            ]
+            arg_defs = []
+            for idx, arg in enumerate(case.args):
+                arg_type = type_to_sqlite_type(arg.type)
+                if arg_type is None:
+                    return SqlCaseResult.unsupported(f"Unsupported type {arg.type}")
+                arg_defs.append(f"arg{idx} {arg_type}")
             schema = ",".join(arg_defs)
             self.conn.execute(f"CREATE TABLE my_table({schema});")
 

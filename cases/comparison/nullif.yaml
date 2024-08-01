@@ -95,3 +95,21 @@ cases:
     result:
       value: null
       type: boolean
+  - group: null_input
+    args:
+      - value: 10
+        type: decimal<38, 0>
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: 10
+      type: boolean
+  - group: null_input
+    args:
+      - value: null
+        type: decimal<38, 0>
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: null
+      type: boolean

@@ -66,3 +66,48 @@ cases:
     result:
       value: inf
       type: fp64
+  - group: basic
+    args:
+      - value: 7
+        type: decimal<38, 0>
+      - value: 4
+        type: decimal<38, 0>
+    result:
+      value: 7
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 0>
+      - value: 2
+        type: decimal<38, 0>
+    result:
+      value: 2
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 0>
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: null
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: 2000000
+        type: decimal<38, 0>
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: 2000000
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 0>
+      - value: 2000000
+        type: decimal<38, 0>
+    result:
+      value: 2000000
+      type: decimal<38, 0>

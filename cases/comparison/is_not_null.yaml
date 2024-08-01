@@ -26,8 +26,22 @@ cases:
       type: boolean
   - group: basic
     args:
+      - value: 7.25
+        type: decimal<38, 3>
+    result:
+      value: true
+      type: boolean
+  - group: basic
+    args:
       - value: null
         type: i8
     result:
       value: False
+      type: boolean
+  - group: basic
+    args:
+      - value: null
+        type: decimal<38, 3>
+    result:
+      value: false
       type: boolean

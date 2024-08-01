@@ -7,6 +7,7 @@ import numpy
 from bft.cases.runner import SqlCaseResult, SqlCaseRunner
 from bft.cases.types import Case
 from bft.dialects.types import SqlMapping
+from bft.utils.utils import type_to_dialect_type
 
 type_map = {
     "i8": cudf.dtype("int8"),
@@ -23,9 +24,7 @@ type_map = {
 
 
 def type_to_cudf_dtype(type: str):
-    if type not in type_map:
-        raise Exception(f"Unrecognized type: {type}")
-    return type_map[type]
+    return type_to_dialect_type(type, type_map)
 
 
 def is_string_function(data_types):

@@ -8,6 +8,7 @@ import pyarrow as pa
 from bft.cases.runner import SqlCaseResult, SqlCaseRunner
 from bft.cases.types import Case, CaseLiteral
 from bft.dialects.types import SqlMapping
+from bft.utils.utils import type_to_dialect_type
 
 type_map = {
     "i8": pa.int8(),
@@ -26,9 +27,7 @@ type_map = {
 
 
 def type_to_datafusion_type(type: str):
-    if type not in type_map:
-        raise Exception(f"Unrecognized type: {type}")
-    return type_map[type]
+    return type_to_dialect_type(type, type_map)
 
 
 def handle_special_cases(lit: CaseLiteral):
@@ -92,6 +91,8 @@ class DatafusionRunner(SqlCaseRunner):
                 for arg_idx, arg in enumerate(case.args):
                     arg_vals = []
                     arg_type = type_to_datafusion_type(arg.type)
+                    if arg_type is None:
+                        return SqlCaseResult.unsupported(f"Unsupported type {arg.type}")
                     for val in arg.value:
                         arg_vals.append(handle_special_cases(val))
                     arg_names.append(f"arg{arg_idx}")
@@ -100,6 +101,8 @@ class DatafusionRunner(SqlCaseRunner):
                 for arg_idx, arg in enumerate(case.args):
                     arg_val = arg_with_type(arg)
                     arg_type = type_to_datafusion_type(arg.type)
+                    if arg_type is None:
+                        return SqlCaseResult.unsupported(f"Unsupported type {arg.type}")
                     orig_types.append(arg.type)
                     arg_vals_list.append(arg_val)
                     arg_types_list.append(arg_type)
