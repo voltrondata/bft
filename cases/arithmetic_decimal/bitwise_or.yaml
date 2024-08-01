@@ -121,3 +121,23 @@ cases:
       # negative 38 9s
       value: -99999999999999999999999999999999999999
       type: decimal<38, 0>
+  - group:
+      id: null_values
+      description: test with null values
+    args:
+      - value: null
+        type: decimal<38, 0>
+      - value: 127
+        type: decimal<38, 0>
+    result:
+      value: null
+      type: decimal<38, 0>
+  - group: null_values
+    args:
+      - value: null
+        type: decimal<38, 0>
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: null
+      type: decimal<38, 0>
