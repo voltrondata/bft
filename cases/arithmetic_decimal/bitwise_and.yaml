@@ -1,0 +1,121 @@
+base_uri: https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_arithmetic_decimal.yaml
+function: bitwise_and
+cases:
+  - group:
+      id: basic
+      description: Basic examples without any special cases
+    args:
+      - value: 0
+        type: decimal<38, 0>
+      - value: 1
+        type: decimal<38, 0>
+    result:
+      value: 0
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: 127
+        type: decimal<38, 0>
+      - value: 127
+        type: decimal<38, 0>
+    result:
+      value: 127
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: -127
+        type: decimal<38, 0>
+      - value: -10
+        type: decimal<38, 0>
+    result:
+      value: -128
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: 31766
+        type: decimal<38, 0>
+      - value: 900
+        type: decimal<38, 0>
+    result:
+      value: 4
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: -31766
+        type: decimal<38, 0>
+      - value: 900
+        type: decimal<38, 0>
+    result:
+      value: 896
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: 2147483647
+        type: decimal<38, 0>
+      - value: 1234567
+        type: decimal<38, 0>
+    result:
+      value: 1234567
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: 2147483647
+        type: decimal<38, 0>
+      - value: 1234567
+        type: decimal<38, 0>
+    result:
+      value: 1234567
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: 9223372036854775807
+        type: decimal<38, 0>
+      - value: 127
+        type: decimal<38, 0>
+    result:
+      value: 127
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: -9223372036854775807
+        type: decimal<38, 0>
+      - value: 127
+        type: decimal<38, 0>
+    result:
+      value: 1
+      type: decimal<38, 0>
+  - group:
+      id: max_values
+      description: test with max values
+    args:
+      # 38 9s
+      - value: 99999999999999999999999999999999999999
+        type: decimal<38, 0>
+      # 38 9s
+      - value: 99999999999999999999999999999999999999
+        type: decimal<38, 0>
+    result:
+      value: 99999999999999999999999999999999999999
+      type: decimal<38, 0>
+  - group: max_values
+    args:
+      # 38 9s
+      - value: 99999999999999999999999999999999999999
+        type: decimal<38, 0>
+      # 38 0s
+      - value: 00000000000000000000000000000000000000
+        type: decimal<38, 0>
+    result:
+      value: 0
+      type: decimal<38, 0>
+  - group: max_values
+    args:
+      # negative 38 9s
+      - value: -99999999999999999999999999999999999999
+        type: decimal<38, 0>
+      # negative 38 9s
+      - value: -99999999999999999999999999999999999999
+        type: decimal<38, 0>
+    result:
+      value: -99999999999999999999999999999999999999
+      type: decimal<38, 0>
