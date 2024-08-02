@@ -1,0 +1,91 @@
+base_uri: https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_arithmetic_decimal.yaml
+function: max
+cases:
+  - group:
+      id: basic
+      description: Basic examples without any special cases
+    args:
+      - value: [20, -3, 1, -10, 0, 5]
+        type: decimal<38, 0>
+    result:
+      value: 20
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: [-32768, 32767, 20000, -30000]
+        type: decimal<38, 0>
+    result:
+      value: 32767
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: [-214748648, 214748647, 21470048, 4000000]
+        type: decimal<38, 0>
+    result:
+      value: 214748647
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: [2000000000, -3217908979, 629000000, -100000000, 0, 987654321]
+        type: decimal<38, 0>
+    result:
+      value: 2000000000
+      type: decimal<38, 0>
+  - group: basic
+    args:
+      - value: [2.5, 0, 5.0, -2.5, -7.5]
+        type: decimal<38, 2>
+    result:
+      value: 5.0
+      type: decimal<38, 2>
+  - group: basic
+    args:
+      - value: [99999999999999999999999999999999999999, 0, -99999999999999999999999999999999999998, 111111111, -76]
+        type: decimal<38, 0>
+    result:
+      value: 99999999999999999999999999999999999999
+      type: decimal<38, 0>
+  - group:
+      id: null_handling
+      description: Examples with null as unput or output
+    args:
+      - value: [Null, Null, Null]
+        type: decimal<38, 0>
+    result:
+      value: Null
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: []
+        type: decimal<38, 0>
+    result:
+      value: Null
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: [2000000000, Null, 629000000, -100000000, Null, 987654321]
+        type: decimal<38, 0>
+    result:
+      value: 2000000000
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: [Null, Null]
+        type: decimal<38, 0>
+    result:
+      value: Null
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: []
+        type: decimal<38, 0>
+    result:
+      value: Null
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: [99999999999999999999999999999999999999, -99999999999999999999999999999999999998, Null, 11111111111111111111111111111111111111, Null]
+        type: decimal<38, 0>
+    result:
+      value: 99999999999999999999999999999999999999
+      type: decimal<38, 0>

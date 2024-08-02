@@ -1,4 +1,5 @@
 import math
+from decimal import Decimal
 from typing import BinaryIO, Iterable, List
 
 from bft.core.yaml_parser import BaseYamlParser, BaseYamlVisitor
@@ -38,7 +39,23 @@ class CaseFileVisitor(BaseYamlVisitor[CaseFile]):
                     return math.nan
                 else:
                     raise ValueError(f"Unrecognized float string literal {value}")
+        if data_type.startswith("dec"):
+            ret_val = self._normalize_decimal_type(value)
+            return ret_val
         return value
+
+    def _normalize_decimal_type(self, val):
+        if val is None:
+            return val
+        if not isinstance(val, list):
+            return Decimal(str(val))
+        converted_list = []
+        for v in val:
+            if v is not None:
+                converted_list.append(Decimal(v))
+            else:
+                converted_list.append(v)
+        return converted_list
 
     def visit_literal(self, lit):
         value = self._get_or_die(lit, "value")
