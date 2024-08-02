@@ -1,5 +1,6 @@
 import datetime
 import math
+from decimal import Decimal, ROUND_DOWN
 from typing import Dict, NamedTuple
 
 import duckdb
@@ -7,7 +8,7 @@ import duckdb
 from bft.cases.runner import SqlCaseResult, SqlCaseRunner
 from bft.cases.types import Case
 from bft.dialects.types import SqlMapping
-from bft.utils.utils import type_to_dialect_type
+from bft.utils.utils import type_to_dialect_type, compareDecimalResult
 
 type_map = {
     "i8": "TINYINT",
@@ -139,6 +140,11 @@ class DuckDBRunner(SqlCaseRunner):
             elif case.result.type.startswith("fp") and case.result.value and result:
                 if math.isclose(result, case.result.value, rel_tol=1e-7):
                     return SqlCaseResult.success()
+            elif case.result.type.startswith("dec") and case.result.value and result:
+                if compareDecimalResult(case.result.value, Decimal(str(result))):
+                    return SqlCaseResult.success()
+                else:
+                    return SqlCaseResult.mismatch(str(result))
             else:
                 if result == case.result.value:
                     return SqlCaseResult.success()

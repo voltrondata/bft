@@ -657,6 +657,22 @@ aggregate_functions:
   aggregate: true
   supported_kernels:
   - any
+- name: arithmetic_decimal.min
+  aggregate: true
+  supported_kernels:
+    - dec
+- name: arithmetic_decimal.max
+  aggregate: true
+  supported_kernels:
+    - dec
+- name: arithmetic_decimal.sum
+  aggregate: true
+  supported_kernels:
+    - dec
+- name: arithmetic_decimal.avg
+  aggregate: true
+  supported_kernels:
+    - dec
 - name: boolean.bool_and
   aggregate: true
   supported_kernels:

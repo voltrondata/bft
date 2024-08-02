@@ -1,0 +1,66 @@
+base_uri: https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_arithmetic_decimal.yaml
+function: avg
+cases:
+  - group:
+      id: basic
+      description: Basic examples without any special cases
+    args:
+      - value: [0, -1, 2, 20]
+        type: decimal<38, 0>
+    result:
+      value: 5.25
+      type: decimal<38, 2>
+  - group: basic
+    args:
+      - value: [2000000, -3217908, 629000, -100000, 0, 987654]
+        type: decimal<38, 0>
+    result:
+      value: 49791
+      type: decimal<38, 5>
+  - group: basic
+    args:
+      - value: [2.5, 0, 5.0, -2.5, -7.5]
+        type: decimal<38, 2>
+    result:
+      value: -0.5
+      type: decimal<38, 2>
+  - group: basic
+    args:
+      - value: [2.5000007152557373046875, 7.0000007152557373046875, 0, 7.0000007152557373046875]
+        type: decimal<38, 22>
+    result:
+      value: 4.12500053644180
+      type: decimal<38, 22>
+  - group:
+      id: overflow
+      description: Examples demonstrating overflow behavior
+    args:
+      - value: [99999999999999999999999999999999999999, 1, 1, 1, 1, 99999999999999999999999999999999999999]
+        type: decimal<38, 0>
+    options:
+      overflow: ERROR
+    result:
+      special: error
+  - group:
+      id: null_handling
+      description: Examples with null as unput or output
+    args:
+      - value: [Null, Null, Null]
+        type: decimal<38, 0>
+    result:
+      value: Null
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: []
+        type: decimal<38, 0>
+    result:
+      value: Null
+      type: decimal<38, 0>
+  - group: null_handling
+    args:
+      - value: [200000, Null, 629000, -10000, 0, 987621]
+        type: decimal<38, 0>
+    result:
+      value: 361324.2
+      type: decimal<38, 2>
