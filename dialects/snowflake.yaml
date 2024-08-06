@@ -59,13 +59,6 @@ scalar_functions:
     rounding: TIE_TO_EVEN
   supported_kernels:
   - fp64_fp64
-- name: arithmetic_decimal.power
-  local_name: pow
-  required_options:
-    overflow: ERROR
-    complex_number_result: ERROR
-  supported_kernels:
-  - dec_dec
 - name: arithmetic.sqrt
   local_name: sqrt
   required_options:
@@ -360,3 +353,18 @@ aggregate_functions:
   aggregate: true
   supported_kernels:
   - bool
+- name: arithmetic_decimal.power
+  local_name: pow
+  required_options:
+    overflow: ERROR
+    complex_number_result: ERROR
+  supported_kernels:
+  - dec_dec
+- name: arithmetic_decimal.sqrt
+  local_name: sqrt
+  supported_kernels:
+    - dec
+- name: arithmetic_decimal.factorial
+  local_name: factorial
+  supported_kernels:
+    - dec

@@ -1,0 +1,59 @@
+base_uri: https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_arithmetic_decimal.yaml
+function: factorial
+cases:
+  - group:
+      id: basic
+      description: Basic examples without any special cases
+    args:
+      - value: 0
+        type: decimal<1,0>
+    result:
+      value: 1
+      type: decimal<38,0>
+  - group: basic
+    args:
+      - value: 1
+        type: decimal<1,0>
+    result:
+      value: 1
+      type: decimal<38,0>
+  - group: basic
+    args:
+      - value: 20
+        type: decimal<2,0>
+    result:
+      value: 2432902008176640000
+      type: decimal<19,0>
+  - group:
+      id: overflow
+      description: Examples demonstrating overflow behavior
+    args:
+      - value: 34
+        type: decimal<2,0>
+    result:
+      special: error
+  - group:
+      id: negative_value
+      description: Examples demonstrating behavior on negative value
+    args:
+      - value: -1
+        type: decimal<1,0>
+    result:
+      special: error
+  - group:
+      id: null_values
+      description: test with null values
+    args:
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: null
+      type: decimal<38, 0>
+  - group: null_values
+    args:
+      - value: null
+        type: decimal<1, 0>
+    result:
+      value: null
+      type: decimal<38, 0>
+

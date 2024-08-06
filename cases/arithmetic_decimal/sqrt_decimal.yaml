@@ -1,0 +1,112 @@
+base_uri: https://github.com/substrait-io/substrait/blob/main/extensions/substrait/extensions/functions_arithmetic_decimal.yaml
+function: sqrt
+cases:
+  - group:
+      id: basic
+      description: Basic examples without any special cases
+    args:
+      - value: 25
+        type: decimal<2,0>
+    result:
+      value: 5
+      type: fp64
+  - group: basic
+    args:
+      - value: 0
+        type: decimal<1,0>
+    result:
+      value: 0
+      type: fp64
+  - group:
+      id: max_input
+      description: max allowed input returns correct result
+    args:
+      - value: 99999999999999999999999999999999999999
+        type: decimal<38,0>
+    result:
+      value: 1e+19
+      type: fp64
+  - group:
+      id: real_number
+      description: real number as input
+    args:
+      - value: 6.25
+        type: decimal<3,2>
+    result:
+      value: 2.5
+      type: fp64
+  - group: real_number
+    args:
+      - value: 2.0000007152557373046875
+        type: decimal<23,22>
+    result:
+      value: 1.4142138152541635
+      type: fp64
+  - group:
+      id: verify_real_number
+      description: verify real number operation are different and doesn't behave as nearby int
+    args:
+      - value: 9
+        type: decimal<1,0>
+    result:
+      value: 3
+      type: fp64
+  - group: verify_real_number
+    args:
+      - value: 8.3
+        type: decimal<2,1>
+    result:
+      value: 2.8809720581775866
+      type: fp64
+  - group: verify_real_number
+    args:
+      - value: 8.5
+        type: decimal<2,1>
+    result:
+      value: 2.9154759474226504
+      type: fp64
+  - group: verify_real_number
+    args:
+      - value: 8.7
+        type: decimal<2,1>
+    result:
+      value: 2.949576240750525
+      type: fp64
+  - group: verify_real_number
+    args:
+      - value: 9.2
+        type: decimal<2,1>
+    result:
+      value: 3.03315017762062
+      type: fp64
+  - group:
+      id: negative_input
+      description: negative input returns error
+    args:
+      - value: -9223372036854775800
+        type: decimal<38,0>
+    result:
+      special: error
+  - group: negative_input
+    args:
+      - value: -2.5
+        type: decimal<2,1>
+    result:
+      special: error
+  - group:
+      id: null_values
+      description: test with null values
+    args:
+      - value: null
+        type: decimal<38, 0>
+    result:
+      value: null
+      type: fp64
+  - group: null_values
+    args:
+      - value: null
+        type: decimal<1, 0>
+    result:
+      value: null
+      type: fp64
+

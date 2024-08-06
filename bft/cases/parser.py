@@ -34,6 +34,8 @@ class CaseFileVisitor(BaseYamlVisitor[CaseFile]):
                     return float("inf")
                 elif value.lower().startswith("-inf"):
                     return float("-inf")
+                elif value.lower().startswith("1e"):
+                    return float(value.lower())
                 elif value.lower().startswith("nan"):
                     return math.nan
                 else:
